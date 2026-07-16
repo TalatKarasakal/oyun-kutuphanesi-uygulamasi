@@ -1,6 +1,7 @@
 plugins {
     id 'application'
     id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.14'
 }
 
 group = 'ege-emre-pelin-talat'
@@ -8,6 +9,11 @@ description = 'this is a game library project for lecture ce216'
 
 repositories {
     mavenCentral()
+}
+
+javafx {
+    version = '21'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics']
 }
 
 dependencies {
@@ -22,4 +28,9 @@ java {
 
 application {
     mainClass = 'Main'
+    // macOS Dock'ta "java" yerine uygulama adı ve simgesi görünsün.
+    applicationDefaultJvmArgs = [
+        '-Xdock:name=Oyun Kütüphanesi',
+        "-Xdock:icon=${project.file('icon.png').absolutePath}"
+    ]
 }

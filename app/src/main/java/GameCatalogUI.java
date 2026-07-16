@@ -42,18 +42,18 @@ public class GameCatalogUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Header with logo and search
-        Text logo = new Text("Game Collection Catalog");
+        Text logo = new Text("Oyun Kütüphanesi");
         logo.setFont(Font.font(24));
         logo.setFill(Color.WHITE);
 
         // Search field
         searchField = new TextField();
-        searchField.setPromptText("Search games...");
+        searchField.setPromptText("Oyun ara...");
         searchField.setPrefWidth(300);
         searchField.textProperty().addListener((obs, oldVal, newVal) -> renderCatalog());
 
         // Home button: reset filters / search
-        Button homeButton = new Button("Home");
+        Button homeButton = new Button("Ana Sayfa");
         homeButton.setOnAction(e -> {
             searchField.clear();
             renderCatalog();
@@ -61,10 +61,10 @@ public class GameCatalogUI extends Application {
         homeButton.setPrefWidth(60);
 
         // Filter & Help buttons
-        Button filterButton = new Button("Filter");
+        Button filterButton = new Button("Filtrele");
         filterButton.setOnAction(e -> showFilterDialog());
 
-        Button helpButton = new Button("Help");
+        Button helpButton = new Button("Yardım");
         helpButton.setOnAction(e -> showHelpDialog());
 
         // Assemble search bar: Home | Search | Filter | Help
@@ -88,15 +88,15 @@ public class GameCatalogUI extends Application {
         mainScroll.setStyle("-fx-background: #34495e;");
 
         // Left panel with actions
-        Button addGameButton = new Button("Add Game");
+        Button addGameButton = new Button("Oyun Ekle");
         addGameButton.setMaxWidth(Double.MAX_VALUE);
         addGameButton.setOnAction(e -> showAddEditGameDialog(null));
 
-        Button importButton = new Button("Import JSON");
+        Button importButton = new Button("JSON İçe Aktar");
         importButton.setMaxWidth(Double.MAX_VALUE);
         importButton.setOnAction(e -> importGames(primaryStage));
 
-        Button exportButton = new Button("Export JSON");
+        Button exportButton = new Button("JSON Dışa Aktar");
         exportButton.setMaxWidth(Double.MAX_VALUE);
         exportButton.setOnAction(e -> exportGames(primaryStage));
 
@@ -112,14 +112,13 @@ public class GameCatalogUI extends Application {
         mainLayout.setLeft(leftPanel);
         mainLayout.setStyle("-fx-background-color: #34495e;");
 
-        // Seed and initial render
-        seedDefaultGames();
+        // İlk render (varsayılan örnek oyunlar artık eklenmiyor)
         renderCatalog();
 
         // Show stage
         Scene scene = new Scene(mainLayout, 1000, 700);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Video Game Catalog");
+        primaryStage.setTitle("Oyun Kütüphanesi");
         primaryStage.show();
     }
 
@@ -276,13 +275,13 @@ public class GameCatalogUI extends Application {
         tagsLabel.setFont(labelFont);
         tagsLabel.setTextFill(Color.WHITE);
 
-        Button editButton = new Button("Edit");
+        Button editButton = new Button("Düzenle");
         editButton.setOnAction(e -> {
             stage.close();
             showAddEditGameDialog(game);
         });
 
-        Button deleteButton = new Button("Delete");
+        Button deleteButton = new Button("Sil");
         deleteButton.setStyle("-fx-background-color: #e74c3c;");
         deleteButton.setOnAction(e -> {
             gameManager.deleteGame(game);
@@ -307,7 +306,7 @@ public class GameCatalogUI extends Application {
 
     private void showAddEditGameDialog(Game gameToEdit) {
         Stage stage = new Stage();
-        stage.setTitle(gameToEdit == null ? "Add New Game" : "Edit Game");
+        stage.setTitle(gameToEdit == null ? "Yeni Oyun Ekle" : "Oyun Düzenle");
 
         // Create form fields
         TextField titleField = new TextField();
@@ -342,21 +341,21 @@ public class GameCatalogUI extends Application {
         form.setHgap(10);
         form.setPadding(new Insets(20));
 
-        form.add(new Label("Title:"), 0, 0);
+        form.add(new Label("Başlık:"), 0, 0);
         form.add(titleField, 1, 0);
-        form.add(new Label("Genre:"), 0, 1);
+        form.add(new Label("Tür:"), 0, 1);
         form.add(genreField, 1, 1);
-        form.add(new Label("Developer:"), 0, 2);
+        form.add(new Label("Geliştirici:"), 0, 2);
         form.add(developerField, 1, 2);
-        form.add(new Label("Publisher:"), 0, 3);
+        form.add(new Label("Yayıncı:"), 0, 3);
         form.add(publisherField, 1, 3);
-        form.add(new Label("Release Year:"), 0, 4);
+        form.add(new Label("Çıkış Yılı:"), 0, 4);
         form.add(yearField, 1, 4);
-        form.add(new Label("Playtime (hours):"), 0, 5);
+        form.add(new Label("Oynanış Süresi (saat):"), 0, 5);
         form.add(playtimeField, 1, 5);
-        form.add(new Label("Platforms (comma separated):"), 0, 6);
+        form.add(new Label("Platformlar (virgülle ayrılmış):"), 0, 6);
         form.add(platformsField, 1, 6);
-        form.add(new Label("Tags (comma separated):"), 0, 7);
+        form.add(new Label("Etiketler (virgülle ayrılmış):"), 0, 7);
         form.add(tagsField, 1, 7);
         form.add(new Label("Steam ID:"), 0, 8);
         form.add(steamIdField, 1, 8);
@@ -364,7 +363,7 @@ public class GameCatalogUI extends Application {
 
 
         // Add buttons
-        Button saveButton = new Button("Save");
+        Button saveButton = new Button("Kaydet");
         saveButton.setOnAction(e -> {
             try {
                 List<String> platforms = List.of(platformsField.getText().split("\\s*,\\s*"));
@@ -395,11 +394,11 @@ public class GameCatalogUI extends Application {
                 renderCatalog();
                 stage.close();
             } catch (NumberFormatException ex) {
-                showAlert("Invalid Input", "Please enter valid numbers for year and playtime.");
+                showAlert("Geçersiz Giriş", "Yıl ve oynanış süresi için geçerli sayılar girin.");
             }
         });
 
-        Button cancelButton = new Button("Cancel");
+        Button cancelButton = new Button("İptal");
         cancelButton.setOnAction(e -> stage.close());
 
         HBox buttonBox = new HBox(10, saveButton, cancelButton);
@@ -416,9 +415,9 @@ public class GameCatalogUI extends Application {
 
     private void showFilterDialog() {
         Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Filter Games");
+        dialog.setTitle("Oyunları Filtrele");
         dialog.getDialogPane().getButtonTypes().addAll(
-                new ButtonType("Apply", ButtonBar.ButtonData.OK_DONE),
+                new ButtonType("Uygula", ButtonBar.ButtonData.OK_DONE),
                 ButtonType.CANCEL);
 
         List<String> allGenres = gameManager.getGenres();
@@ -434,7 +433,7 @@ public class GameCatalogUI extends Application {
 
         // Year TextField
         TextField yearField = new TextField();
-        yearField.setPromptText("Enter Year (e.g. 2020)");
+        yearField.setPromptText("Yıl girin (örn. 2020)");
 
         List<String> allTags = gameManager.getTags();
         Map<String, BooleanProperty> tagsChecked = new HashMap<>();
@@ -460,11 +459,11 @@ public class GameCatalogUI extends Application {
         c2.setHgrow(Priority.ALWAYS);
         grid.getColumnConstraints().addAll(c1, c2);
 
-        grid.add(new Label("Genres:"), 0, 0);
+        grid.add(new Label("Türler:"), 0, 0);
         grid.add(genreList, 1, 0);
-        grid.add(new Label("Year:"), 0, 1);
+        grid.add(new Label("Yıl:"), 0, 1);
         grid.add(yearField, 1, 1);
-        grid.add(new Label("Tags:"), 0, 2);
+        grid.add(new Label("Etiketler:"), 0, 2);
         grid.add(tagsList, 1, 2);
 
         dialog.getDialogPane().setContent(grid);
@@ -491,7 +490,7 @@ public class GameCatalogUI extends Application {
             List<Game> filtered = gameManager.filterGames(selGenres, selYears, selTags);
             gameCatalog.getChildren().clear();
             if (filtered.isEmpty()) {
-                gameCatalog.getChildren().add(new Text("No games found matching the selected filters!"));
+                gameCatalog.getChildren().add(new Text("Seçilen filtrelere uygun oyun bulunamadı!"));
             } else {
                 filtered.forEach(g -> gameCatalog.getChildren().add(createGameCard(g)));
             }
@@ -500,7 +499,7 @@ public class GameCatalogUI extends Application {
 
     private void importGames(Stage primaryStage) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Import Games from JSON");
+        fileChooser.setTitle("JSON dosyasından oyunları içe aktar");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("JSON Files", "*.json"));
         File file = fileChooser.showOpenDialog(primaryStage);
@@ -517,7 +516,7 @@ public class GameCatalogUI extends Application {
 
     private void exportGames(Stage primaryStage) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Export Games to JSON");
+        fileChooser.setTitle("Oyunları JSON dosyasına aktar");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("JSON Files", "*.json"));
         File file = fileChooser.showSaveDialog(primaryStage);
@@ -533,46 +532,46 @@ public class GameCatalogUI extends Application {
 
     private void showHelpDialog() {
         Alert helpDialog = new Alert(Alert.AlertType.INFORMATION);
-        helpDialog.setTitle("User Manual - Game Catalog");
-        helpDialog.setHeaderText("Welcome to the Game Collection Catalog Help Section");
+        helpDialog.setTitle("Kullanım Kılavuzu - Oyun Kütüphanesi");
+        helpDialog.setHeaderText("Oyun Kütüphanesi Yardım Bölümüne Hoş Geldiniz");
 
         String content = """
-        This application helps you manage your video game collection efficiently.
+        Bu uygulama, video oyunu koleksiyonunuzu verimli şekilde yönetmenize yardımcı olur.
 
-        🔹 Adding a Game:
-           - Click the 'Add' button.
-           - Fill in the fields such as title, genre, developer, etc.
-           - Click 'Save' to add the game to your collection.
+        🔹 Oyun Ekleme:
+           - 'Oyun Ekle' butonuna tıklayın.
+           - Başlık, tür, geliştirici gibi alanları doldurun.
+           - Oyunu koleksiyonunuza eklemek için 'Kaydet'e tıklayın.
 
-        🔹 Editing a Game:
-           - Select a game from the list.
-           - Click the 'Edit' button.
-           - Modify the fields and click 'Save'.
+        🔹 Oyun Düzenleme:
+           - Listeden bir oyun seçin.
+           - 'Düzenle' butonuna tıklayın.
+           - Alanları değiştirip 'Kaydet'e tıklayın.
 
-        🔹 Deleting a Game:
-           - Select a game from the list.
-           - Click the 'Delete' button.
+        🔹 Oyun Silme:
+           - Listeden bir oyun seçin.
+           - 'Sil' butonuna tıklayın.
 
-        🔹 Searching:
-           - Use the search bar to find games by title, developer, publisher, or tags.
+        🔹 Arama:
+           - Başlık, geliştirici, yayıncı veya etikete göre aramak için arama çubuğunu kullanın.
 
-        🔹 Filtering:
-           - Use genre dropdown, year input or tags list to filter games.
-           - Multiple filters can be applied together.
+        🔹 Filtreleme:
+           - Tür açılır menüsünü, yıl girişini veya etiket listesini kullanarak filtreleyin.
+           - Birden fazla filtre birlikte uygulanabilir.
 
-        🔹 Importing/Exporting:
-           - Click 'Import' to load games from a JSON file.
-           - Click 'Export' to save the current list to a JSON file.
+        🔹 İçe/Dışa Aktarma:
+           - JSON dosyasından oyun yüklemek için 'İçe Aktar'a tıklayın.
+           - Mevcut listeyi kaydetmek için 'Dışa Aktar'a tıklayın.
 
-        🔹 Cover Image:
-           - Add a cover image when adding or editing a game.
-           - Image must be a valid file path (e.g., D:\\covers\\game.jpg)
+        🔹 Kapak Görseli:
+           - Oyun eklerken veya düzenlerken bir kapak görseli ekleyin.
+           - Görsel geçerli bir dosya yolu olmalıdır (örn. D:\\kapaklar\\oyun.jpg)
 
-        💡 Tip:
-           - Hover over fields for tooltips.
-           - All changes are saved in JSON format locally.
+        💡 İpucu:
+           - Alanların üzerine gelerek ipuçlarını görebilirsiniz.
+           - Tüm değişiklikler yerel olarak JSON biçiminde kaydedilir.
 
-        For further help, contact: support@gamecatalogapp.com
+        Daha fazla yardım için: support@gamecatalogapp.com
         """;
 
         TextArea textArea = new TextArea(content);
