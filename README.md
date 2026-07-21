@@ -18,19 +18,17 @@ Bu proje, video oyun koleksiyonlarını dijital ortamda düzenli bir şekilde ta
 - **Veri Yönetimi:** Google Gson (JSON serileştirme ve deserileştirme işlemleri için)
 - **Derleme Aracı:** Gradle (Bağımlılık yönetimi ve otomasyon için)
 
-## 🤖 Geliştirme Süreci
-Bu projenin mimarisi ve geliştirme aşamaları, **insan-makine iş birliği** (Human-AI Collaboration) prensibiyle bir **Yapay Zeka Ajanı** desteğiyle gerçekleştirilmiştir. Tasarım kararları, kod optimizasyonu ve hata ayıklama süreçlerinde üst düzey yapay zeka algoritmalarından yararlanılarak, endüstri standartlarına uygun, temiz ve sürdürülebilir bir kod yapısı (Clean Code) hedeflenmiştir. Bu yaklaşım, modern yazılım geliştirme metodolojilerinin en güncel örneklerinden birini temsil etmektedir.
-
 ## 🚀 Kurulum ve Çalıştırma Talimatları
 Uygulamayı yerel ortamınızda çalıştırmak için şu adımları izleyin:
 
 1. **Önkoşullar:** Bilgisayarınızda **JDK 21** yüklü olmalıdır.
 2. **Depoyu Klonlayın:**
    ```bash
-   git clone https://github.com/kullanici-adi/oyun-kutuphanesi-uygulamasi.git
+   git clone https://github.com/TalatKarasakal/oyun-kutuphanesi-uygulamasi.git
    cd oyun-kutuphanesi-uygulamasi
    ```
-3. **Uygulamayı Çalıştırın:** Gradle wrapper kullanarak projeyi başlatın:
+3. **Kaynak Kod:** Uygulamanın Java kaynak dosyaları `app/src/main/java` dizinindedir.
+4. **Uygulamayı Çalıştırın:** Gradle wrapper kullanarak projeyi başlatın:
    ```bash
    ./gradlew run
    ```
@@ -57,19 +55,17 @@ This project is a professional desktop catalog application developed to organize
 - **Data Management:** Google Gson (For JSON serialization and deserialization)
 - **Build Tool:** Gradle (For dependency management and automation)
 
-## 🤖 Development Process
-The architecture and development phases of this project were carried out using **Human-AI Collaboration** principles, supported by an **AI Agent**. By utilizing high-level AI algorithms in design decisions, code optimization, and debugging processes, we aimed for a clean and sustainable code structure in accordance with industry standards. This approach represents one of the most up-to-date examples of modern software development methodologies.
-
 ## 🚀 Installation and Running Instructions
 Follow these steps to run the application in your local environment:
 
 1. **Prerequisites:** **JDK 21** must be installed on your computer.
 2. **Clone the Repository:**
    ```bash
-   git clone https://github.com/username/oyun-kutuphanesi-uygulamasi.git
+   git clone https://github.com/TalatKarasakal/oyun-kutuphanesi-uygulamasi.git
    cd oyun-kutuphanesi-uygulamasi
    ```
-3. **Run the Application:** Start the project using the Gradle wrapper:
+3. **Source Code:** The Java source files are located in `app/src/main/java`.
+4. **Run the Application:** Start the project using the Gradle wrapper:
    ```bash
    ./gradlew run
    ```
